@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8rkhktn0p1sh"]
+
+[ext_resource type="Material" uid="uid://cv0a4il211xe3" path="res://fire/flame.tres" id="1_fiuo3"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7isix"]
+material = ExtResource("1_fiuo3")
+radius = 1.0
+height = 3.0
+
+[node name="MeshInstance3D2" type="MeshInstance3D"]
+mesh = SubResource("CapsuleMesh_7isix")

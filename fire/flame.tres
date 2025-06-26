@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cv0a4il211xe3"]
+
+[ext_resource type="Shader" uid="uid://bv1i2cfa17cbu" path="res://fire/flame.gdshader" id="1_m8vwm"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_m8vwm")
+shader_parameter/_start_color = Color(1, 0, 0, 1)
+shader_parameter/_end_color = Color(1, 1, 0, 0)
+shader_parameter/_end_pos = 0.4

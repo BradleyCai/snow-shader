@@ -1,0 +1,287 @@
+[gd_scene load_steps=34 format=3 uid="uid://bdejdrr0gct6d"]
+
+[ext_resource type="Texture2D" uid="uid://d3r030owxoeni" path="res://ground/Fresh_Windswept_Snow_ugspafgdy_2K_Normal.jpg" id="2_bcigw"]
+[ext_resource type="Shader" uid="uid://cex3i0wrdbkre" path="res://ground/snow_ground_parallax.gdshader" id="3_bcigw"]
+[ext_resource type="Shader" uid="uid://bqnrsoo8jd1op" path="res://ground/impact.gdshader" id="5_mc0iw"]
+[ext_resource type="Script" uid="uid://ccskwi5gvql2u" path="res://scripts/back_svp_rect.gd" id="6_m5xr0"]
+[ext_resource type="Shader" uid="uid://ddbrucijveh6n" path="res://display_texture_2d_shader.tres" id="7_l5hyc"]
+[ext_resource type="Script" uid="uid://d1p0464neg46f" path="res://scripts/front_svp_rect.gd" id="8_s1r4o"]
+[ext_resource type="Script" uid="uid://cblbs18v8q4tj" path="res://scripts/depth_effect.gd" id="9_bcigw"]
+[ext_resource type="Script" uid="uid://cdc2jfeitocp5" path="res://scripts/depth_inverse_flip_effect.gd" id="9_mb8a2"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3a44n"]
+viewport_path = NodePath("impact front")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mc0iw"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_bcigw")
+shader_parameter/_color = Color(0.650128, 0.650128, 0.650128, 1)
+shader_parameter/_tile = Vector2(1, 1)
+shader_parameter/_offset = Vector2(0, 0)
+shader_parameter/_impact_map = SubResource("ViewportTexture_3a44n")
+shader_parameter/_normalmap = ExtResource("2_bcigw")
+shader_parameter/_mid_point = 0.5
+shader_parameter/_depth_scale = 0.2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_etwok"]
+size = Vector2(30, 30)
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_2cgbk"]
+parameter_name = "Texture2DParameter"
+texture_type = 1
+color_default = 2
+texture_filter = 1
+texture_repeat = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_mb8a2"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShader" id="VisualShader_bcigw"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_disabled, unshaded, shadows_disabled, ambient_light_disabled;
+
+uniform sampler2D Texture2DParameter : source_color, hint_default_transparent, filter_nearest, repeat_disable;
+
+
+
+void fragment() {
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Texture2DParameter, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+
+
+}
+"
+modes/specular = 2
+flags/unshaded = true
+flags/shadows_disabled = true
+flags/ambient_light_disabled = true
+nodes/fragment/0/position = Vector2(480, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_2cgbk")
+nodes/fragment/2/position = Vector2(-540, 180)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_mb8a2")
+nodes/fragment/3/position = Vector2(-20, 200)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 0, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mb8a2"]
+viewport_path = NodePath("below actors")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fuly6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("VisualShader_bcigw")
+shader_parameter/Texture2DParameter = SubResource("ViewportTexture_mb8a2")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gn6hf"]
+size = Vector2(30, 30)
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_bcigw"]
+parameter_name = "Texture2DParameter"
+texture_type = 1
+color_default = 2
+texture_filter = 1
+texture_repeat = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3a44n"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShader" id="VisualShader_fuly6"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_disabled, unshaded, shadows_disabled, ambient_light_disabled;
+
+uniform sampler2D Texture2DParameter : source_color, hint_default_transparent, filter_nearest, repeat_disable;
+
+
+
+void fragment() {
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Texture2DParameter, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+
+
+}
+"
+modes/specular = 2
+flags/unshaded = true
+flags/shadows_disabled = true
+flags/ambient_light_disabled = true
+nodes/fragment/0/position = Vector2(480, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_bcigw")
+nodes/fragment/2/position = Vector2(-540, 180)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_3a44n")
+nodes/fragment/3/position = Vector2(-20, 200)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 0, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mc0iw"]
+viewport_path = NodePath("impact front")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m5xr0"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("VisualShader_fuly6")
+shader_parameter/Texture2DParameter = SubResource("ViewportTexture_mc0iw")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sfgjc"]
+viewport_path = NodePath("below actors")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ogxsx"]
+viewport_path = NodePath("impact front")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4veug"]
+viewport_path = NodePath("above surface")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qta4p"]
+resource_local_to_scene = true
+shader = ExtResource("5_mc0iw")
+shader_parameter/_front_tex = SubResource("ViewportTexture_ogxsx")
+shader_parameter/_below_actors_tex = SubResource("ViewportTexture_sfgjc")
+shader_parameter/_surface_depth_tex = SubResource("ViewportTexture_4veug")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f8pp0"]
+viewport_path = NodePath("impact back")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1egxx"]
+resource_local_to_scene = true
+shader = ExtResource("7_l5hyc")
+shader_parameter/display_tex = SubResource("ViewportTexture_f8pp0")
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_2cgbk"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("9_bcigw")
+metadata/_custom_type_script = "uid://cblbs18v8q4tj"
+
+[sub_resource type="Compositor" id="Compositor_mb8a2"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_2cgbk")])
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_bcigw"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("9_mb8a2")
+metadata/_custom_type_script = "uid://cdc2jfeitocp5"
+
+[sub_resource type="Compositor" id="Compositor_3a44n"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_bcigw")])
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qta4p"]
+size = Vector3(30, 2, 30)
+
+[node name="snow ground" type="Node3D"]
+
+[node name="snow mesh" type="MeshInstance3D" parent="."]
+layers = 5
+material_override = SubResource("ShaderMaterial_mc0iw")
+mesh = SubResource("PlaneMesh_etwok")
+skeleton = NodePath("../..")
+
+[node name="debug below actors" type="MeshInstance3D" parent="."]
+visible = false
+layers = 5
+material_override = SubResource("ShaderMaterial_fuly6")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_gn6hf")
+skeleton = NodePath("../..")
+
+[node name="debug impact map" type="MeshInstance3D" parent="."]
+visible = false
+layers = 5
+material_override = SubResource("ShaderMaterial_m5xr0")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_gn6hf")
+skeleton = NodePath("../..")
+
+[node name="impact back" type="SubViewport" parent="."]
+disable_3d = true
+handle_input_locally = false
+
+[node name="ColorRect" type="ColorRect" parent="impact back"]
+texture_filter = 1
+texture_repeat = 1
+material = SubResource("ShaderMaterial_qta4p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_m5xr0")
+
+[node name="impact front" type="SubViewport" parent="."]
+disable_3d = true
+handle_input_locally = false
+
+[node name="ColorRect" type="ColorRect" parent="impact front"]
+texture_filter = 1
+texture_repeat = 1
+material = SubResource("ShaderMaterial_1egxx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_s1r4o")
+
+[node name="above surface" type="SubViewport" parent="."]
+anisotropic_filtering_level = 0
+gui_disable_input = true
+canvas_cull_mask = 4294443012
+
+[node name="Camera3D" type="Camera3D" parent="above surface"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
+cull_mask = 524292
+compositor = SubResource("Compositor_mb8a2")
+projection = 1
+current = true
+size = 30.0
+near = 0.001
+far = 4.0
+
+[node name="below actors" type="SubViewport" parent="."]
+anisotropic_filtering_level = 0
+gui_disable_input = true
+canvas_cull_mask = 4294443010
+
+[node name="Camera3D" type="Camera3D" parent="below actors"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, -2, 0)
+cull_mask = 524290
+compositor = SubResource("Compositor_3a44n")
+projection = 1
+current = true
+size = 30.0
+near = 0.001
+far = 4.0
+
+[node name="ground collision" type="RigidBody3D" parent="."]
+disable_mode = 1
+collision_layer = 3
+collision_mask = 3
+can_sleep = false
+freeze = true
+contact_monitor = true
+max_contacts_reported = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_qta4p")
+debug_color = Color(0, 0.6, 0.7, 1)
+debug_fill = false

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://2urrp1gxblqm"]
+
+[ext_resource type="ArrayMesh" uid="uid://qsgj62kf1njq" path="res://models/tree/res/branch.res" id="1_mcofe"]
+
+[node name="branch" type="Node3D"]
+
+[node name="branch mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(49.9695, 1.74497, 0, -1.74497, 49.9695, 0, 0, 0, 50, 2.30926, -0.210509, -4.31925)
+mesh = ExtResource("1_mcofe")

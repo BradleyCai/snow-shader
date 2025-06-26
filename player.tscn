@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://cde0q1ltv3dd6"]
+
+[ext_resource type="Script" uid="uid://ixo5n3oxrw44" path="res://scripts/player.gd" id="1_i3pqv"]
+[ext_resource type="Shader" uid="uid://cstgxd1ybpce8" path="res://fire/fire.tres" id="2_hqtel"]
+[ext_resource type="Script" uid="uid://cuaeyd4xy71bj" path="res://scripts/camera_spring_arm.gd" id="3_sweqy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q05a6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q05a6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7isix"]
+albedo_color = Color(0.23, 0.538, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7isix"]
+render_priority = 0
+shader = ExtResource("2_hqtel")
+shader_parameter/FireColor = Color(0.47, 3, 0.532, 1)
+shader_parameter/Speed = 0.765
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ui6mq"]
+material = SubResource("ShaderMaterial_7isix")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7isix"]
+
+[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("pivot", "viewer")]
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_block_on_wall = false
+floor_snap_length = 0.0
+script = ExtResource("1_i3pqv")
+speed = 5
+fall_acceleration = 25
+pivot = NodePath("CollisionShape3D")
+viewer = NodePath("SpringArm3D")
+jump_amount = 500.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.275, 0, 0, 0, 0.18, 0, 0, 0, 0.53, 0.801, 0.0984579, 0)
+layers = 3
+mesh = SubResource("BoxMesh_q05a6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.275, 0, 0, 0, 0.18, 0, 0, 0, 0.53, -0.806437, 0.0760618, 0)
+layers = 3
+mesh = SubResource("BoxMesh_q05a6")
+
+[node name="ball" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_q05a6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7isix")
+
+[node name="fire" type="MeshInstance3D" parent="ball"]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0.680238, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_ui6mq")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.002)
+shape = SubResource("CapsuleShape3D_7isix")
+debug_fill = false
+
+[node name="player light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.46874, 0)
+visible = false
+light_color = Color(0.433651, 0.433651, 0.433651, 1)
+light_energy = 10.219
+shadow_enabled = true
+omni_range = 14.0
+omni_attenuation = 0.309
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.881316, 0)
+collision_mask = 2
+spring_length = 3.0
+script = ExtResource("3_sweqy")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+cull_mask = 524287

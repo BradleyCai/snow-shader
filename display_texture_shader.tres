@@ -1,0 +1,44 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://da05q6cdoat2m"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_w21kh"]
+parameter_name = "Texture2DParameter"
+texture_type = 1
+color_default = 2
+texture_filter = 1
+texture_repeat = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_bgmav"]
+expanded_output_ports = [0]
+source = 5
+
+[resource]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_disabled, unshaded, shadows_disabled, ambient_light_disabled;
+
+uniform sampler2D Texture2DParameter : source_color, hint_default_transparent, filter_nearest, repeat_disable;
+
+
+
+void fragment() {
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Texture2DParameter, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+
+
+}
+"
+modes/specular = 2
+flags/unshaded = true
+flags/shadows_disabled = true
+flags/ambient_light_disabled = true
+nodes/fragment/0/position = Vector2(480, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_w21kh")
+nodes/fragment/2/position = Vector2(-540, 180)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_bgmav")
+nodes/fragment/3/position = Vector2(-20, 200)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 0, 0)

@@ -1,0 +1,40 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://ddbrucijveh6n"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_wtqru"]
+parameter_name = "display_tex"
+texture_type = 1
+texture_filter = 1
+texture_repeat = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_g8460"]
+expanded_output_ports = [0]
+source = 5
+
+[resource]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D display_tex : source_color, filter_nearest, repeat_disable;
+
+
+
+void fragment() {
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(display_tex, UV);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0.xyz);
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_wtqru")
+nodes/fragment/2/position = Vector2(-680, 100)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_g8460")
+nodes/fragment/3/position = Vector2(-80, 160)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 0, 0)

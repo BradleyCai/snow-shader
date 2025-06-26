@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfenw40fqdw5l"]
+
+[ext_resource type="Material" uid="uid://beenvf3i1xtwf" path="res://fire/spirit_flame.tres" id="1_uwoc0"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ui6mq"]
+material = ExtResource("1_uwoc0")
+bottom_radius = 0.25
+height = 1.0
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("CylinderMesh_ui6mq")
+skeleton = NodePath("../../..")

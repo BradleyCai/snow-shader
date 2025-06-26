@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpqm0mkncw6li"]
+
+[ext_resource type="ArrayMesh" uid="uid://cbalh8fbxn2c" path="res://models/tree/res/tree2.res" id="1_1m8y5"]
+
+[node name="tree2" type="Node3D"]
+
+[node name="Tree2 mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0.801298, -0.173506, -0.487371)
+mesh = ExtResource("1_1m8y5")
+skeleton = NodePath("../..")

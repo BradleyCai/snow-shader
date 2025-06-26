@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://doqhmfnafargi"]
+
+[ext_resource type="ArrayMesh" uid="uid://dot2ypukpwekh" path="res://models/tree/res/big_tree.res" id="2_14jd8"]
+
+[node name="BigTree" type="Node3D"]
+
+[node name="BigTreeMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 6.312, 0.815, 0)
+instance_shader_parameters/sway_seed = Vector2(0, 0)
+mesh = ExtResource("2_14jd8")

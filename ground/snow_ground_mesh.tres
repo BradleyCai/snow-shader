@@ -1,0 +1,19 @@
+[gd_resource type="PlaneMesh" load_steps=4 format=3 uid="uid://bbj31owmdrvjr"]
+
+[ext_resource type="Shader" uid="uid://cbln6pfwvqryl" path="res://ground/snow_ground.gdshader" id="1_cirh6"]
+[ext_resource type="Texture2D" uid="uid://d3r030owxoeni" path="res://ground/Fresh_Windswept_Snow_ugspafgdy_2K_Normal.jpg" id="2_emo1o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vmrc8"]
+render_priority = 0
+shader = ExtResource("1_cirh6")
+shader_parameter/_color = Color(0.693015, 0.693015, 0.693015, 1)
+shader_parameter/_normalmap = ExtResource("2_emo1o")
+shader_parameter/_displacement_intensity = 0.1
+shader_parameter/_displacement_scale = 0.1
+shader_parameter/_tile = Vector2(1, 1)
+shader_parameter/_offset = Vector2(0, 0)
+
+[resource]
+material = SubResource("ShaderMaterial_vmrc8")
+subdivide_width = 50
+subdivide_depth = 50

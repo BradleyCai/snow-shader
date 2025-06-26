@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bnhe8a4w3fx5k"]
+
+[resource]
+resource_name = "wood"
+albedo_color = Color(0.259398, 0.135686, 0, 1)
+metallic = 0.2
+roughness = 0.8
+metadata/extras = {
+"fromFBX": {
+"isTruePBR": false,
+"shadingModel": "Lambert"
+}
+}

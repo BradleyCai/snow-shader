@@ -1,0 +1,73 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dsq8rrs7sggpx"]
+
+[sub_resource type="Shader" id="Shader_gglgx"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.4.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec2 sway_offset = vec2(0.03, 0.03);
+uniform vec2 sway_density = vec2(24.0, 24.0);
+uniform vec2 sway_time = vec2(0.15, 0.15);
+instance uniform vec2 sway_seed = vec2(0.0, 0.0);
+
+group_uniforms StandardMaterialParams;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+group_uniforms;
+
+void vertex() {
+	float sway_amount = sin(TIME * TAU * sway_time.x + -VERTEX.y * sway_density.x + sway_seed.x) * sway_offset.x * -VERTEX.y;
+	VERTEX = VERTEX + vec3(sway_amount, 0.0, sway_amount);
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[resource]
+resource_name = "wood"
+render_priority = 0
+shader = SubResource("Shader_gglgx")
+shader_parameter/sway_offset = Vector2(0.03, 0.03)
+shader_parameter/sway_density = Vector2(24, 24)
+shader_parameter/sway_time = Vector2(0.15, 0.15)
+shader_parameter/albedo = Color(0.259398, 0.135686, 0, 1)
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.8
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.2
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)

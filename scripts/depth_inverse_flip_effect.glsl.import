@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://dhluvjhhejcbi"
+path="res://.godot/imported/depth_inverse_flip_effect.glsl-aac2f1299dbb178d8751be9c1a219737.res"
+
+[deps]
+
+source_file="res://scripts/depth_inverse_flip_effect.glsl"
+dest_files=["res://.godot/imported/depth_inverse_flip_effect.glsl-aac2f1299dbb178d8751be9c1a219737.res"]
+
+[params]
+

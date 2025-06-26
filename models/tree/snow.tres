@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ybxxu333og06"]
+
+[resource]
+resource_name = "snow"
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+metallic = 0.2
+roughness = 0.8
+metadata/extras = {
+"fromFBX": {
+"isTruePBR": false,
+"shadingModel": "Lambert"
+}
+}

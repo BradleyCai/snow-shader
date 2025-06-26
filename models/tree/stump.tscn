@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8d7tf5jo3cy2"]
+
+[ext_resource type="ArrayMesh" uid="uid://b0sidsgcf10or" path="res://models/tree/res/stump.res" id="1_tdylo"]
+
+[node name="stump" type="Node3D"]
+
+[node name="tree stump mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, -8.301, 0.125, 7.761)
+mesh = ExtResource("1_tdylo")
